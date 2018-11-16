@@ -1,16 +1,48 @@
 <% include partials/header.ejs %>
+
+
+
+    <nav class="navbar navbar-dark mb-4" style="background-color: #4eabec;">
+        <div class="container">
+            <a class="navbar-brand" href="/">YelpCamp</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav navbar-right">
+                    <li>
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
     <div class="container">
-        <h1>Campground Page</h1>
+        <header class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1>Welcome To YelpCamp</h1>
+                <p>View our hand-picked campgrounds from all over the world</p>
+                <p><a class="btn btn-primary btn-lg" href="/campgrounds/new">Add New Campground</a></p>
+            </div>
+        </header>
+        <div class="row text-center" style="display:flex; flex-wrap:wrap">
 
             <% campgrounds.forEach(function(campground) { %>
                 
-                    <div>
-                        <h4><%= campground.name %></h4>
-                        <img width="500px" height="200px" class="img-fluid img-thumbnail" src="<%= campground.image %>" alt="">
+                    <div class="col-md-3 col-sm-6">
+                        <div class="img-thumbnail">
+                            
+                            <img class="img-fluid" src="<%= campground.image %>" alt="">
+                            <figure class="figure mt-2">
+                                <h5><%= campground.name %></h5>
+                            </figure>
+                        </div>
                     </div>
                 
             <% }) %>
-
+        </div>
     </div>
 
 <% include partials/footer.ejs %>
