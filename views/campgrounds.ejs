@@ -1,9 +1,16 @@
-<h1>Campground Page</h1>
+<% include partials/header.ejs %>
+    <div class="container">
+        <h1>Campground Page</h1>
 
+            <% campgrounds.forEach(function(campground) { %>
+                
+                    <div>
+                        <h4><%= campground.name %></h4>
+                        <img width="500px" height="200px" class="img-fluid img-thumbnail" src="<%= campground.image %>" alt="">
+                    </div>
+                
+            <% }) %>
 
-    <% campgrounds.forEach(function(campground) { %>
-        <div>
-            <h4><%= campground.name %></h4>
-            <img src="<%= campground.image %>" alt="">
-        </div>
-    <% }) %>
+    </div>
+
+<% include partials/footer.ejs %>
