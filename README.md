@@ -10,3 +10,4 @@ NEW     /campgrounds/new    GET     Display form to make a new campground
 CREATE  /campgrounds        POST    Add new campgrounds to database
 SHOW    /campgrounds/:id    GET     Show info about one campground
 
+

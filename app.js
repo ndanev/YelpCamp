@@ -5,15 +5,7 @@ const app = express();
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/yelp_camp', { useNewUrlParser: true });
 
-const Schema = mongoose.Schema;
-
-let campgroundSchema = new mongoose.Schema({
-    name: String,
-    image: String,
-    description: String
-});
-
-let Campground = mongoose.model("Campground", campgroundSchema);
+const Campground = require('./models/campground');
 
 //     Campground.create(
 
@@ -95,7 +87,7 @@ app.get('/campgrounds/new', (req, res) => {
 
 // show info about one dog
 app.get('/campgrounds/:id', (req, res) => {
-    // find the campground with provided by ID
+    // find the campground with provided ID
     Campground.findById(req.params.id, function(error, foundCampground) {
         if(error) {
             console.log(error);
