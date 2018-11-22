@@ -1,11 +1,24 @@
 const express = require('express');
 const app = express();
 
+// setup body-parser 
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.set('view engine', 'ejs');
+
+
+const Comments = require('./models/comment');
+const Campground = require('./models/campground');
+
+const seedDB = require('./seeds');
+
 // setup mongoose
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/yelp_camp', { useNewUrlParser: true });
 
-const Campground = require('./models/campground');
+seedDB();
+
 
 //     Campground.create(
 
@@ -23,11 +36,6 @@ const Campground = require('./models/campground');
 //         }
 //     );
 
-// setup body-parser 
-const bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
-
-app.set('view engine', 'ejs');
 
 
 // let campgrounds = [
