@@ -11,3 +11,6 @@ CREATE  /campgrounds        POST    Add new campgrounds to database
 SHOW    /campgrounds/:id    GET     Show info about one campground
 
 
+NEW     /campgrounds/:id/comments/new   GET
+CREATE  /campgrounds/:id/comments       POST
+

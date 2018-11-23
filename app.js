@@ -33,7 +33,7 @@ app.get('/campgrounds', (req, res) => {
         if(error) {
             console.log(error);
         } else {
-            res.render('index', { campgrounds: allCampgrounds });
+            res.render('campgrounds/index', { campgrounds: allCampgrounds });
         }
     })
 
@@ -59,7 +59,7 @@ app.post('/campgrounds', (req, res) => {
 
 // show the form to create new campgrounds 
 app.get('/campgrounds/new', (req, res) => {
-    res.render('new');
+    res.render('campgrounds/new');
 });
 
 // show info about one dog
@@ -69,10 +69,50 @@ app.get('/campgrounds/:id', (req, res) => {
         if(error) {
             console.log(error);
         } else {
-            console.log(foundCampground);
             // render show tamplate with that campground
-            res.render('show', {campground: foundCampground});
+            res.render('campgrounds/show', {campground: foundCampground});
         }
+    });
+
+});
+
+// ===============
+// COMMENT ROUTES
+// ===============
+app.get('/campgrounds/:id/comments/new', (req, res) => {
+    // find campground by id
+    Campground.findById(req.params.id, (error, campground) => {
+        if(error) {
+            console.log(error);
+        } else {
+            res.render('comments/new', {campground: campground});
+        }
+    });
+
+});
+
+app.post('/campgrounds/:id/comments', (req, res) => {
+    // lookup campground using id
+    Campground.findById(req.params.id, (error, campground) => {
+        if(error) {
+            console.log(error);
+            res.redirect('/campgrounds');
+        } else {
+            // create a new comment
+            Comments.create(req.body.comment, (error, comment) => {
+                if(error) {
+                    console.log(error);
+                } else {
+                    // connect new comment to campground
+                    campground.comments.push(comment);
+                    campground.save();
+                    // redirect campground show page 
+                    res.redirect('/campgrounds/' + campground._id);
+                }
+            });
+                  
+        }
+
     });
 
 });
