@@ -5,7 +5,8 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
+// use static file
+app.use(express.static(__dirname + '/public'));
 
 
 const Comments = require('./models/comment');
