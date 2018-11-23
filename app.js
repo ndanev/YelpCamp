@@ -5,51 +5,20 @@ const app = express();
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.set('view engine', 'ejs');
+
 
 
 const Comments = require('./models/comment');
 const Campground = require('./models/campground');
 
-const seedDB = require('./seeds');
+const seedDB = require('./seeds.js');
+app.set('view engine', 'ejs');
 
 // setup mongoose
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/yelp_camp', { useNewUrlParser: true });
 
 seedDB();
-
-
-//     Campground.create(
-
-//         {
-//             name: "Granite Hill",
-//             image: "https://images.pexels.com/photos/1309584/pexels-photo-1309584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
-//             description: "This is huge campground. No bathrooms, no water. Beautiful granite"
-//         }, function (error, campground) {
-//             if (error) {
-//                 console.log(error);
-//             } else {
-//                 console.log('created new campground');
-//                 console.log(campground);
-//             }
-//         }
-//     );
-
-
-
-// let campgrounds = [
-//     { name: "Salmon Creek", image: "https://images.pexels.com/photos/1309586/pexels-photo-1309586.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
-//     { name: "Granite Hill", image: "https://images.pexels.com/photos/1309584/pexels-photo-1309584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
-//     { name: "Mountain Goat's Rest", image: "https://images.pexels.com/photos/878251/pexels-photo-878251.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
-//     { name: "Salmon Creek", image: "https://images.pexels.com/photos/1309586/pexels-photo-1309586.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
-//     { name: "Granite Hill", image: "https://images.pexels.com/photos/1309584/pexels-photo-1309584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
-//     { name: "Mountain Goat's Rest", image: "https://images.pexels.com/photos/878251/pexels-photo-878251.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
-//     { name: "Salmon Creek", image: "https://images.pexels.com/photos/1309586/pexels-photo-1309586.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
-//     { name: "Granite Hill", image: "https://images.pexels.com/photos/1309584/pexels-photo-1309584.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" },
-//     { name: "Mountain Goat's Rest", image: "https://images.pexels.com/photos/878251/pexels-photo-878251.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260" }
-// ];
-
 
 // landing page (root path)
 app.get('/', (req, res) => {
@@ -96,10 +65,11 @@ app.get('/campgrounds/new', (req, res) => {
 // show info about one dog
 app.get('/campgrounds/:id', (req, res) => {
     // find the campground with provided ID
-    Campground.findById(req.params.id, function(error, foundCampground) {
+    Campground.findById(req.params.id).populate("comments").exec((error, foundCampground) => {
         if(error) {
             console.log(error);
         } else {
+            console.log(foundCampground);
             // render show tamplate with that campground
             res.render('show', {campground: foundCampground});
         }

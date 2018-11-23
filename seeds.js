@@ -48,8 +48,6 @@ seedDB = () => {
             });
         });
     });
-
-    // add a comments
 }
 
 module.exports = seedDB;
