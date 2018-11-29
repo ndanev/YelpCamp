@@ -29,6 +29,11 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// use this function on every page (route) which allows me to use "currentUser" variable in every tamplate
+app.use(function(req, res, next) {
+    res.locals.currentUser = req.user;
+    next();
+});
 
 // setup body-parser 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -48,13 +53,13 @@ app.get('/', (req, res) => {
 });
 
 //  display list of campgrounds 
-app.get('/campgrounds', isLoggedIn, (req, res) => {
+app.get('/campgrounds', (req, res) => {
 
     Campground.find({}, function(error, allCampgrounds) {
         if(error) {
             console.log(error);
         } else {
-            res.render('campgrounds/index', { campgrounds: allCampgrounds });
+            res.render('campgrounds/index', { campgrounds: allCampgrounds, currentUser: req.user});
         }
     })
 
@@ -100,7 +105,7 @@ app.get('/campgrounds/:id', (req, res) => {
 // ===============
 // COMMENT ROUTES
 // ===============
-app.get('/campgrounds/:id/comments/new', (req, res) => {
+app.get('/campgrounds/:id/comments/new',isLoggedIn, (req, res) => {
     // find campground by id
     Campground.findById(req.params.id, (error, campground) => {
         if(error) {
@@ -112,7 +117,7 @@ app.get('/campgrounds/:id/comments/new', (req, res) => {
 
 });
 
-app.post('/campgrounds/:id/comments', (req, res) => {
+app.post('/campgrounds/:id/comments',isLoggedIn, (req, res) => {
     // lookup campground using id
     Campground.findById(req.params.id, (error, campground) => {
         if(error) {
@@ -173,7 +178,7 @@ app.post('/login', passport.authenticate('local', {
 // Logout route
 app.get('/logout', (req, res) => {
     req.logout();
-    res.redirect('/');
+    res.redirect('/campgrounds');
 });
 
 function isLoggedIn(req, res, next) {
