@@ -48,7 +48,7 @@ app.get('/', (req, res) => {
 });
 
 //  display list of campgrounds 
-app.get('/campgrounds', (req, res) => {
+app.get('/campgrounds', isLoggedIn, (req, res) => {
 
     Campground.find({}, function(error, allCampgrounds) {
         if(error) {
@@ -157,6 +157,31 @@ app.post('/register', (req, res) => {
         });
     });
 });
+
+// Login routes
+app.get('/login', (req, res) => {
+    res.render('login');
+});
+
+app.post('/login', passport.authenticate('local', {
+    successRedirect: '/campgrounds',
+    failureRedirect: '/login'
+}), (req, res) => {
+
+});
+
+// Logout route
+app.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+});
+
+function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login');
+}
 
 // Listening on port 3000 
 app.listen(3000, () => {

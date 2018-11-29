@@ -9,3 +9,8 @@
 .img-thumbnail .caption-full {
     padding: 9px;
 }
+
+#avatar_img {
+    width: 70px;
+    height: 70px;
+}
