@@ -1,9 +1,20 @@
 const express = require('express');
-const app = express();
-
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const passportLocalMongoose = require('passport-local-mongoose');
+const seedDB = require('./seeds.js');
+const Comments = require('./models/comment');
+const Campground = require('./models/campground');
+const User = require('./models/user');
+
+const app = express();
+
+// setup mongoose
+mongoose.connect('mongodb://localhost/yelp_camp', { useNewUrlParser: true });
+
+// express-session config
 app.use(require('express-session')({
     secret: "This is my authentication for Yelp_Camp",
     resave: false,
@@ -11,24 +22,22 @@ app.use(require('express-session')({
 
 }));
 
+// PASSPORT CONFIGURATION
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+
 // setup body-parser 
-const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // use static file
 app.use(express.static(__dirname + '/public'));
 
-
-const Comments = require('./models/comment');
-const Campground = require('./models/campground');
-const User = require('./models/user');
-
-const seedDB = require('./seeds.js');
+// setup view engine
 app.set('view engine', 'ejs');
-
-// setup mongoose
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/yelp_camp', { useNewUrlParser: true });
 
 seedDB();
 
@@ -127,6 +136,26 @@ app.post('/campgrounds/:id/comments', (req, res) => {
 
     });
 
+});
+
+//=============
+// AUTH ROUTES
+//=============
+
+app.get('/register', (req, res) => {
+    res.render('register');
+});
+
+app.post('/register', (req, res) => {
+    User.register(new User({username: req.body.username}), req.body.password, (error, user) => {
+        if(error) {
+            console.log(error);
+            return res.render('register');
+        }
+        passport.authenticate('Local')(req, res, () => {
+            res.redirect('/campgrounds');
+        });
+    });
 });
 
 // Listening on port 3000 
