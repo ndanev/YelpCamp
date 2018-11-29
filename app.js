@@ -1,6 +1,16 @@
 const express = require('express');
 const app = express();
 
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const passportLocalMongoose = require('passport-local-mongoose');
+app.use(require('express-session')({
+    secret: "This is my authentication for Yelp_Camp",
+    resave: false,
+    saveUninitialized: true,
+
+}));
+
 // setup body-parser 
 const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -11,6 +21,7 @@ app.use(express.static(__dirname + '/public'));
 
 const Comments = require('./models/comment');
 const Campground = require('./models/campground');
+const User = require('./models/user');
 
 const seedDB = require('./seeds.js');
 app.set('view engine', 'ejs');
@@ -117,7 +128,6 @@ app.post('/campgrounds/:id/comments', (req, res) => {
     });
 
 });
-
 
 // Listening on port 3000 
 app.listen(3000, () => {
