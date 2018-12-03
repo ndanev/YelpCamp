@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // setup mongoose
 mongoose.connect('mongodb://localhost/yelp_camp', { useNewUrlParser: true });
 
-seedDB();
+// seedDB();
 
 // express-session config
 app.use(require('express-session')({
