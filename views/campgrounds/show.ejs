@@ -17,10 +17,12 @@
                     <h4><a href="#"><strong><%= campground.name %></strong></a></h4>
                     <p><%= campground.description %></p>
                     <p><em>created by <%= campground.author.username %></em></p>
-                    <a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-xs btn-warning">Edit</a>
-                    <form id="delete" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
-                        <button class="btn btn-xs btn-danger">DELETE</button>
-                    </form>
+                    <% if(currentUser && campground.author.id.equals(currentUser._id)) { %>
+                        <a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-xs btn-warning">Edit</a>
+                        <form id="delete" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+                            <button class="btn btn-xs btn-danger">DELETE</button>
+                        </form>
+                    <%} %>
                 </div>
             </div>
             <div class="well">
