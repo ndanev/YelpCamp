@@ -2,12 +2,22 @@
 <div class="hero">
     <div class="container h-100 d-flex align-items-center justify-content-center">
         <div class="hero-content">
-            <h1 class="hero-title">Lorem ipsum dolor sit amet consectetur elit.</h1>
-            <p class="hero-lead mb-5">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptas nihil,
-                consequatur
-                numquam hic quasi
-                eum debitis at distinctio alias ullam.</p>
-            <a class="button hero-button" href="/campgrounds">Pogledajte naša mesta</a>
+            <h1 class="hero-title">Popularne turističke destinacije u Srbiji.</h1>
+            <p class="hero-lead">Pretražite i podelite vaše omiljene destinacije na području Srbije. Cilj ove platforme
+                jeste da upoznamo i priblžimo ljude sa našim najlepšim destinacijama u Srbiji. </p>
+
+            <form action="/campgrounds" method="get" class="mb-5">
+                <div class="form-group">
+                    <label for="search"></label>
+                    <input type="text" name="search" id="search" class="form-control search-input"
+                        placeholder="Pretraži omiljeno mesto...">
+                    <button class="button search-btn" type="submit">Pretraži</button>
+                </div>
+            </form>
+
+
+            <a class="button hero-button" href="/campgrounds">Pogledajte naša mesta <i class="fa fa-arrow-right ml-2"
+                    aria-hidden="true"></i></a>
         </div>
     </div>
 </div>

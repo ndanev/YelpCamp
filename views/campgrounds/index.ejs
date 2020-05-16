@@ -1,6 +1,4 @@
 <% include ../partials/header %>
-
-
 <div class="container">
     <section class="section section-add">
         <div class="section-add-text">
@@ -11,23 +9,22 @@
             <a class="button button-add" href="/campgrounds/new"><img src="/img/plus.svg" alt=""> Dodaj novo mesto</a>
         </div>
     </section>
-    <div class="row text-center" style="display:flex; flex-wrap:wrap">
-
+    <div class="row">
         <% campgrounds.forEach(function(campground) { %>
-
-        <div class="col-md-4 col-sm-6">
-            <div class="img-thumbnail mb-4">
-
-                <img class="img-fluid" src="<%= campground.image %>" alt="">
-                <figure class="figure mt-2">
-                    <h5><%= campground.name %></h5>
-                </figure>
-                <p><a class="btn btn-info" href="campgrounds/<%= campground._id %>">Read More</a></p>
-            </div>
+        <div class="col-md-4">
+            <a href="campgrounds/<%= campground._id %>" class="place-card-wrapper">
+                <article class="place-card">
+                    <div class="place-card-image">
+                        <img class="img-fluid" src="<%= campground.image %>" alt="<%= campground.name %>">
+                    </div>
+                    <div class="place-card-content">
+                        <h1 class="place-card-title"><%= campground.name %></h1>
+                        <p class="place-card-text"><%= campground.description.slice(0, 100) %>...</p>
+                    </div>
+                </article>
+            </a>
         </div>
-
         <% }) %>
     </div>
 </div>
-
 <% include ../partials/footer %>

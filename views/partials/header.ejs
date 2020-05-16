@@ -9,15 +9,15 @@
     <!-- font awesome -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- bootstrap 4 -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <!-- link to style.css -->
     <link rel="stylesheet" href="/stylesheets/style.css">
 </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg navbar-light">
+        <nav class="navbar navbar-expand">
             <div class="container">
                 <a class="navbar-brand" href="/"><img src="/img/compase.svg" alt=""> Favorite <span>Place</span></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -36,13 +36,17 @@
                                     aria-hidden="true"></i>Sign Up</a>
                         </li>
                         <% } else { %>
-                        <li class="nav-item"><a href=""><i class="fa fa-user-circle mr-1"
-                                    aria-hidden="true"></i><%= currentUser.username %></a></li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/logout"><i class="fa fa-user mr-1 text-danger"
-                                    aria-hidden="true"></i>Logout</a>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="nav-link dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle mr-1"
+                                    aria-hidden="true"></i><%= currentUser.username %></a>
+
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
+
                         </li>
-                        <%} %>
+                        <% } %>
                     </ul>
                 </div>
             </div>

@@ -1,19 +1,18 @@
 <% include ../partials/header %>
 <div class="container">
-    <div class="row">
+    <div class="col-md-12">
         <h1>Create A New Campground</h1>
-            <form class="input-group" action="/campgrounds" method="POST">
-                <input class="form-control" type="text" placeholder="title" name="name"><br>
-                <br>
-                <input class="form-control" type="text" placeholder="image-url" name="image" ><br>
-                <br>
-                <input class="form-control" type="text" placeholder="description" name="description" ><br>
-                <br>
-                <input class="btn btn-primary btn-block" type="submit" value="Create New Campground"><br>
-                <br>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <form class="form-group" action="/campgrounds" method="POST">
+                <input class="form-control" type="text" placeholder="title" name="name">
+                <input class="form-control" type="text" placeholder="image-url" name="image">
+                <input class="form-control" type="text" placeholder="description" name="description">
+                <input class="btn btn-primary btn-block" type="submit" value="Create New Campground">
             </form>
-
             <a href="/campgrounds">Go Back</a>
+        </div>
     </div>
 </div>
 

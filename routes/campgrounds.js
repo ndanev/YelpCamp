@@ -6,14 +6,27 @@ const Campground = require('../models/campground');
 //  display list of campgrounds 
 router.get('/campgrounds', (req, res) => {
 
-    Campground.find({}, function (error, allCampgrounds) {
-        if (error) {
-            console.log(error);
-        } else {
-            res.render('campgrounds/index', { campgrounds: allCampgrounds });
-        }
-    })
+    if (req.query.search) {
 
+        const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+
+        Campground.find({ name: regex }, function (error, allCampgrounds) {
+            if (error) {
+                console.log(error);
+            } else {
+                res.render('campgrounds/index', { campgrounds: allCampgrounds });
+            }
+        });
+
+    } else {
+        Campground.find({}, function (error, allCampgrounds) {
+            if (error) {
+                console.log(error);
+            } else {
+                res.render('campgrounds/index', { campgrounds: allCampgrounds });
+            }
+        });
+    }
 });
 
 // post request --> add newe campgrounds to database
@@ -117,5 +130,9 @@ function checkCampgroundOwnership(req, res, next) {
         res.redirect('back');
     }
 }
+
+function escapeRegex(text) {
+    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+};
 
 module.exports = router;
