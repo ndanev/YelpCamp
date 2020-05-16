@@ -3,14 +3,11 @@ const router = express.Router();
 const passport = require('passport');
 const User = require('../models/user');
 
-// var express = require('express');
-// var router = express.Router();
-// var passport = require('passport');
-// var User = require('../models/user');
-
 
 // landing page (root path)
 router.get('/', (req, res) => {
+    var date = new Date();
+    // var year = date.getFullYear();
     res.render('landing');
 
 });
@@ -22,9 +19,9 @@ router.get('/register', (req, res) => {
 
 router.post('/register', (req, res) => {
 
-    var newUser = new User({username: req.body.username});
+    var newUser = new User({ username: req.body.username });
     User.register(newUser, req.body.password, (error, user) => {
-        if(error) {
+        if (error) {
             console.log(error);
             return res.render('register');
         }
@@ -53,7 +50,7 @@ router.get('/logout', (req, res) => {
 });
 
 function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()) {
+    if (req.isAuthenticated()) {
         return next();
     }
     res.redirect('/login');

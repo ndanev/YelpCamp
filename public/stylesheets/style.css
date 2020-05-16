@@ -1,3 +1,36 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,300;1,400&display=swap');
+
+* {
+    font-family: 'Nunito Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.button {
+    padding: 12px 35px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: all .25s ease-out;
+}
+
+.button-add {
+    border: 1px solid #4b70bb;
+}
+
+.button:hover {
+    text-decoration: none;
+}
+
+
+
+
+
+
+
+
+
+
 .img-thumbnail img {
     width: 100%;
 }
@@ -17,4 +50,140 @@
 
 #delete {
     display: inline;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #4b70bb;
+    z-index: 1;
+}
+
+.navbar-brand {
+    color: #fff !important;
+    font-weight: 700;
+}
+
+.navbar-brand span {
+    color: #71eeb8 !important;
+}
+
+.navbar-nav .nav-item {
+    margin-left: 10px;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #fff;
+    transition: all .25s ease-out;
+}
+
+.navbar-nav .nav-item .nav-link i {
+    color: #fff;
+}
+
+.navbar-nav .nav-item .nav-link:hover > i {
+    color: #4b70bb;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    background-color: #fff;
+    color: #4b70bb;
+}
+
+.hero {
+    width: 100%;
+    height: 700px;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/0/03/Uvac_River_and_Eagle.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    /* border-bottom: 10px solid #4b70bb; */
+}
+
+.hero .hero-content {
+    color: #fff;
+    text-align: center;
+}
+
+.hero-title {
+    font-weight: 900;
+}
+
+.hero-lead {
+    font-weight: 600;
+    font-size: 20px;
+}
+
+.hero-button {
+    background-color: #f83b3b;
+    color: #fff;
+}
+
+.hero-button:hover {
+    background-color: #4b70bb;
+    color: #fff;
+}
+
+.section {
+    padding: 75px 0;
+}
+
+.section-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: #333;
+}
+
+.section-title span {
+    color: #4b70bb;
+}
+
+.section-subtitle {
+    font-size: 25px;
+    font-weight: 500;
+    color: #333;
+}
+
+.section-lead {
+    color: #333;
+    font-size: 18px;
+}
+
+.section-features .features-card {
+    display: flex;
+    margin-bottom: 25px;
+}
+
+.section-features .features-card .feature-card-image {
+    margin-right: 15px;
+}
+
+.section-features .features-card .feature-card-text .feature-card-title {
+    font-size: 25px;
+}
+
+.section-features .features-card .feature-card-text .feature-card-lead {
+    font-size: 18px;
+}
+
+.section-add .section-add-text {
+    margin-bottom: 25px;
 }
